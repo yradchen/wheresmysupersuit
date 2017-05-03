@@ -1,10 +1,10 @@
-export const RECEIVE_LOCATION  = "RECEIVE_LOCATION";
+export const RECEIVE_GEOLOCATION  = "RECEIVE_GEOLOCATION";
 
-const receiveLoadingState = (geolocation) => ({
-  type: RECEIVE_LOCATION,
+const receiveGeolocation = (geolocation) => ({
+  type: RECEIVE_GEOLOCATION,
   geolocation
 });
 
-export const setLoadingState = (geolocation) => dispatch => (
-  dispatch(receiveLoadingState(geolocation))
+export const setGeolocation = (geolocation) => dispatch => (
+  dispatch(receiveGeolocation(geolocation))
 );
