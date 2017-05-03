@@ -1,13 +1,17 @@
 require 'digest/md5'
 # Digest::MD5.hexdigest("#{timestamp}#{privatekey}#{publickey}")
 class Api::MarvelController < ApplicationController
+  def show
+    redis = Redis.new
+    debugger
+  end
 
   def index
     public_key = "523ab47cd7c7a5ba6df62001d5fb0451"
     base_address = "https://gateway.marvel.com:443/v1/public/characters"
     redis = Redis.new
     redis.flushall
-    1.times do |number|
+    15.times do |number|
       ts = Time.now.to_i
       hash = Digest::MD5.hexdigest("#{ts}#{ENV["MARVEL"]}#{public_key}")
       params = {
