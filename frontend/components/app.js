@@ -2,9 +2,11 @@ import React from 'react';
 import { fetchSuperHeroes, fetchSuperHero } from '../actions/marvel_actions';
 import { connect } from 'react-redux';
 import GoogleMaps from './maps';
+import Autocomplete from './autocomplete';
 
 const mapStateToProps = (state) => {
   return {
+    geolocation: state.geolocation
   };
 };
 
@@ -25,8 +27,8 @@ class Homepage extends React.Component {
     return (
       <main id="main">
         <div id="body">
-          <h1>Hi!</h1>
-          <GoogleMaps/>
+          <Autocomplete/>
+          <GoogleMaps geolocation={this.props.geolocation} />
           <button onClick={() => this.props.fetchSuperHero()}>Hero</button>
           {/* <button onClick={fetchSuperHeroes}>Heroes</button> */}
         </div>
@@ -34,16 +36,6 @@ class Homepage extends React.Component {
     );
   }
 }
-// const App = ({ children, fetchSuperHeroes, fetchSuperHero }) => {
-//   return (
-//     <main id="main">
-//       <div id="body">
-//         <h1>Hi!</h1>
-//         <button onClick={fetchSuperHero}>Hero</button>
-//         {/* <button onClick={fetchSuperHeroes}>Heroes</button> */}
-//       </div>
-//     </main>
-//   );
-// };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Homepage);
