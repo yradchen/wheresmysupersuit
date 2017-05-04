@@ -21,13 +21,14 @@ class Autocomplete extends React.Component {
   }
 
   handleAddress(error, geolocation, address) {
+    this.props.fetchSuperHero(geolocation);
     this.props.setGeolocation(geolocation);
   }
 
-  update(field) {
-    return e =>
-      this.setState({[field]: e.currentTarget.value});
-  }
+  // update(field) {
+  //   return e =>
+  //     this.setState({[field]: e.currentTarget.value});
+  // }
 
   render() {
     const inputProps = {

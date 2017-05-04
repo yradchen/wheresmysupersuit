@@ -6,6 +6,7 @@ import GoogleMaps from './maps';
 import Autocomplete from './autocomplete';
 import SuperHero from './superhero';
 const mapStateToProps = (state) => {
+
   return {
     geolocation: state.geolocation
   };
@@ -29,11 +30,11 @@ class Homepage extends React.Component {
     return (
       <main id="main">
         <div id="body">
-          <Autocomplete setGeolocation={this.props.setGeolocation}/>
+          <Autocomplete setGeolocation={this.props.setGeolocation} fetchSuperHero={this.props.fetchSuperHero}/>
           <GoogleMaps geolocation={this.props.geolocation} />
           <SuperHero />
           <button onClick={() => this.props.fetchSuperHero()}>Hero</button>
-          {/* <button onClick={fetchSuperHeroes}>Heroes</button> */}
+          <button onClick={this.props.fetchSuperHeroes}>All Heroes</button>
         </div>
       </main>
     );
