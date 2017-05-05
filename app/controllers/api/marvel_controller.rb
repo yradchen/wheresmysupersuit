@@ -1,23 +1,5 @@
 require 'digest/md5'
 
-AREAS = {
-"NYC" => [40.730610, -73.935242],
-"Boston" => [42.364506, -71.038887],
-"DC" => [38.894207, -77.035507],
-"Chicago" => [41.881832, -87.623177],
-"Indianapolis" => [39.832081, -86.145454],
-"LA" => [34.052235, -118.243683],
-"SF" => [37.733795, -122.446747],
-"Dallas" => [32.897480, -97.040443],
-"Denver" => [39.742043, -104.991531],
-"Seattle" => [47.608013, -122.335167],
-"New Orleans" => [29.951065, -90.071533],
-"Orlando" => [28.538336, -81.379234],
-"Baltimore" => [39.299236, -76.609383],
-"Minneapolis" => [44.986656, -93.258133],
-"Cleveland" => [41.505493, -81.681290]
-}
-
 class Api::MarvelController < ApplicationController
 
   def show
@@ -27,10 +9,10 @@ class Api::MarvelController < ApplicationController
     if distance == 0
       distance = 125000
     end
-    debugger
-    redis = Redis.new
-    redis.georadius("superheroes_location", lng, lat, 125000, "mi", "ASC")
 
+    redis = Redis.new
+    heroes = redis.georadius("superheroes_location", lng, lat, distance, "mi", "ASC")
+    render json: heroes
   end
 
   def index
@@ -42,6 +24,24 @@ class Api::MarvelController < ApplicationController
   end
 
   private
+
+  AREAS = {
+  "NYC" => [40.730610, -73.935242],
+  "Boston" => [42.364506, -71.038887],
+  "DC" => [38.894207, -77.035507],
+  "Chicago" => [41.881832, -87.623177],
+  "Indianapolis" => [39.832081, -86.145454],
+  "LA" => [34.052235, -118.243683],
+  "SF" => [37.733795, -122.446747],
+  "Dallas" => [32.897480, -97.040443],
+  "Denver" => [39.742043, -104.991531],
+  "Seattle" => [47.608013, -122.335167],
+  "New Orleans" => [29.951065, -90.071533],
+  "Orlando" => [28.538336, -81.379234],
+  "Baltimore" => [39.299236, -76.609383],
+  "Minneapolis" => [44.986656, -93.258133],
+  "Cleveland" => [41.505493, -81.681290]
+  }
 
   def get_and_set_heroes(redis)
     base_address = "https://gateway.marvel.com:443/v1/public/characters"

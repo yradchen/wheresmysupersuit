@@ -6,13 +6,14 @@ import { setDropdownState } from '../actions/visibility_actions';
 import { connect } from 'react-redux';
 import GoogleMaps from './maps';
 import Autocomplete from './autocomplete';
-import SuperHero from './superhero';
+import ClosestSuperHeroes from './closest_superheroes';
 import TopFifteen from './top_fifteen';
 const mapStateToProps = (state) => {
   return {
     geolocation: state.geolocation,
-    superHeroes: state.superHeroes,
-    dropdown: state.visibility.dropdown
+    topFifteenHeroes: state.superHeroes.topFifteen,
+    dropdown: state.visibility.dropdown,
+    closestSuperheroes: state.superHeroes.closest
   };
 };
 
@@ -44,11 +45,11 @@ class Homepage extends React.Component {
     return (
       <main id="main" onClick={this.removeDropDown}>
         <div id="body">
-          <SuperHero />
+          <ClosestSuperHeroes closestSuperheroes={this.props.closestSuperheroes}/>
           <Autocomplete setGeolocation={this.props.setGeolocation} fetchSuperHero={this.props.fetchSuperHero}/>
           <GoogleMaps geolocation={this.props.geolocation} />
           <TopFifteen fetchSuperHeroes={this.props.fetchSuperHeroes}
-          superHeroes={this.props.superHeroes}
+          topFifteenHeroes={this.props.topFifteenHeroes}
           dropdown={this.props.dropdown}
           setDropdownState={this.props.setDropdownState}/>
           {/* <button onClick={() => this.props.fetchSuperHero()}>Hero</button>

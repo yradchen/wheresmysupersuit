@@ -9,7 +9,7 @@ const TopFifteen = (props) => {
       props.setDropdownState("hidden");
     }
   };
-  const superHeroes = props.superHeroes.map( (hero, index) => {
+  const superHeroes = props.topFifteenHeroes.map( (hero, index) => {
     return <li key={`${hero}`}>{`${index + 1}. ${hero}`}</li>;
   });
 
