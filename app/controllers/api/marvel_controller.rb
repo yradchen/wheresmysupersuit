@@ -1,4 +1,5 @@
 require 'digest/md5'
+
 AREAS = {
 "NYC" => [40.730610, -73.935242],
 "Boston" => [42.364506, -71.038887],
@@ -18,24 +19,28 @@ AREAS = {
 }
 
 class Api::MarvelController < ApplicationController
+
   def show
     lat = params["location"]["lat"]
     lng = params["location"]["lng"]
     redis = Redis.new
+    redis.georadius("superheroes_location", lng, lat, 125000, "mi", "ASC")
     debugger
   end
 
   def index
-    base_address = "https://gateway.marvel.com:443/v1/public/characters"
+
     redis = set_redis_db
-    get_and_set_heroes
+    get_and_set_heroes(redis)
     top_fifteen_heroes = (redis.zrevrange("superheroes", 0, 14))
     geoadd_data(redis, top_fifteen_heroes)
     render json: top_fifteen_heroes
   end
 
   private
-  def get_and_set_heroes
+
+  def get_and_set_heroes(redis)
+    base_address = "https://gateway.marvel.com:443/v1/public/characters"
     15.times do |number|
       ts = Time.now.to_i
       hash = Digest::MD5.hexdigest("#{ts}#{ENV["MARVEL"]}#{ENV["MARVEL_PUBLIC"]}")
@@ -69,24 +74,8 @@ class Api::MarvelController < ApplicationController
     AREAS.keys.each_with_index do |location, index|
       lng = AREAS[location][0]
       lat = AREAS[location][1]
-      hero = top_fifteen[index]
-      redis.geoadd("superheroes", lat, lng, hero)
+      hero = top_fifteen_heroes[index]
+      redis.geoadd("superheroes_location", lat, lng, hero)
     end
   end
 end
-
-# start a loop that goes from 0 15
-
-# heroes = JSON.parse(response)
-# heroes["data"]["results"] == array
-
-# array.each do |hero|
-# hero["comics"]["available"] == number
-# redis.zadd("superheroes", number, hero)
-
-# make 15 queries.
-# redis = Redis.new
-# use redis sorted set?
-# ZREVRANGE name 0 15
-# redis.zadd("superheroes", 3, "jeff")
-# redis.zrevrange("superheroes", 0, 14)

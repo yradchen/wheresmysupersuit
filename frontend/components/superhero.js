@@ -6,7 +6,7 @@ class SuperHero extends React.Component {
   }
 
   render() {
-    return <p>hello</p>;
+    return <p className="superhero absolute">SuperHeroContainer</p>;
   }
 }
 

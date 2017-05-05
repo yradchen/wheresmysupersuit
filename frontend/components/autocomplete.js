@@ -5,7 +5,7 @@ import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete';
 class Autocomplete extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { address: "New York, NY" };
+    this.state = { };
     this.handleAddress = this.handleAddress.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.onChange = (address) => this.setState({ address });
@@ -13,14 +13,11 @@ class Autocomplete extends React.Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
-    // geocodeByAddress(this.state.address,  (err, latLng) => {
-    //   if (err) { console.log('Oh no!', err); }
-    //   console.log(`Yay! Got latitude and longitude for`, latLng);
-    // });
     geocodeByAddress(this.state.address, this.handleAddress);
   }
 
   handleAddress(error, geolocation, address) {
+    // debugger
     this.props.fetchSuperHero(geolocation);
     this.props.setGeolocation(geolocation);
   }
@@ -34,12 +31,13 @@ class Autocomplete extends React.Component {
     const inputProps = {
       value: this.state.address,
       onChange: this.onChange,
+      placeholder: "Search Places and Nearby Marvel Heroes"
     };
     return (
-      <section>
+      <section className="autocomplete absolute">
         <form onSubmit={this.handleFormSubmit}>
-          <PlacesAutocomplete inputProps={inputProps} />
-          <button type="submit">Submit</button>
+          <PlacesAutocomplete inputProps={inputProps}
+          />
         </form>
       </section>
     );
