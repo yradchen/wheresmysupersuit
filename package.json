@@ -22,7 +22,13 @@
   },
   "devDependencies": {},
   "scripts": {
+    "postinstall": "webpack",
+    "webpack": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "6.2.1",
+    "npm": "4.2.0"
   },
   "keywords": [],
   "author": "",
