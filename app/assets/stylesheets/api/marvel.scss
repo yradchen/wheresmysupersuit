@@ -1,15 +1,22 @@
 // Place all the styles related to the api/marvel controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-body, main, p, input, button {
+body, main, p, input, button, ul, li {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-#map {
-  height: 100vh;
-  width: 100vw;
+li {
+  list-style: none;
 }
+input {
+  padding: 10px;
+}
+// #map {
+//   height: 100vh;
+//   width: 100vw;
+// }
 .absolute {
   position: absolute;
   z-index: 1;
@@ -19,10 +26,48 @@ body, main, p, input, button {
   left: 80%;
   top: 10%;
 }
+
 .autocomplete {
   top: 10%;
   left: 5%;
   width: 30%;
+}
+
+.autocomplete > form {
+  text-align: center;
+}
+.autocomplete > form > input {
+  margin-top: 2px;
+}
+
+
+.all-heroes {
+  top: 10%;
+  left: 50%;
+  display: flex;
+}
+
+.all-heroes > button, .all-heroes > div {
+  margin: 5px;
+}
+
+// drop-down
+
+.dropdown {
+  position: relative;
+}
+
+.drop-items {
+  // border-color: grey;
+  border: 1px solid lightgray;;
+  border-radius: 4px;
+  position: absolute;
+  white-space: nowrap;
+  padding: 5px;
+}
+
+.hidden {
+  display: none;
 }
 
 // target input field of autocomplete

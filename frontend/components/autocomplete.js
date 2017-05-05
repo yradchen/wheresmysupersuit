@@ -5,7 +5,7 @@ import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete';
 class Autocomplete extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { };
+    this.state = { distance: "", address: "" };
     this.handleAddress = this.handleAddress.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.onChange = (address) => this.setState({ address });
@@ -17,15 +17,15 @@ class Autocomplete extends React.Component {
   }
 
   handleAddress(error, geolocation, address) {
-    // debugger
+    geolocation.distance = this.state.distance;
     this.props.fetchSuperHero(geolocation);
     this.props.setGeolocation(geolocation);
   }
 
-  // update(field) {
-  //   return e =>
-  //     this.setState({[field]: e.currentTarget.value});
-  // }
+  update(field) {
+    return e =>
+      this.setState({[field]: e.currentTarget.value});
+  }
 
   render() {
     const inputProps = {
@@ -38,6 +38,12 @@ class Autocomplete extends React.Component {
         <form onSubmit={this.handleFormSubmit}>
           <PlacesAutocomplete inputProps={inputProps}
           />
+          <input type="text"
+                  value={this.state.distance}
+                  onChange={this.update("distance")}
+                  placeholder={"Distance in miles"}
+                  />
+          <input className="hidden" type="submit" value="search"/>
         </form>
       </section>
     );

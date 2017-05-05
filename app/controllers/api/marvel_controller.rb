@@ -23,13 +23,17 @@ class Api::MarvelController < ApplicationController
   def show
     lat = params["location"]["lat"]
     lng = params["location"]["lng"]
+    distance = params["location"]["distance"].to_i
+    if distance == 0
+      distance = 125000
+    end
+    debugger
     redis = Redis.new
     redis.georadius("superheroes_location", lng, lat, 125000, "mi", "ASC")
-    debugger
+
   end
 
   def index
-
     redis = set_redis_db
     get_and_set_heroes(redis)
     top_fifteen_heroes = (redis.zrevrange("superheroes", 0, 14))
@@ -41,7 +45,7 @@ class Api::MarvelController < ApplicationController
 
   def get_and_set_heroes(redis)
     base_address = "https://gateway.marvel.com:443/v1/public/characters"
-    15.times do |number|
+    1.times do |number|
       ts = Time.now.to_i
       hash = Digest::MD5.hexdigest("#{ts}#{ENV["MARVEL"]}#{ENV["MARVEL_PUBLIC"]}")
       params = {
