@@ -14,7 +14,6 @@ export const fetchSuperHero = (location) => {
 };
 
 export const setupSuperHeroes = () => {
-  debugger
   return $.ajax({
     method: 'PATCH',
     url: `api/marvel/hero`,
