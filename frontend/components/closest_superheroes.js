@@ -10,20 +10,11 @@ const ClosestSuperHeroes = ({ closestSuperheroes }) => {
   }
 
   return (
-    <ul className={`superhero absolute ${visible}`}>
+    <ul className={`bordered superhero absolute ${visible}`}>
       <p>Closest Heroes</p>
       {heroes}
     </ul>
   );
 };
-// class ClosestSuperHeroes extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   }
-//
-//   render() {
-//     return <p className="superhero absolute">SuperHeroContainer</p>;
-//   }
-// }
 //
 export default ClosestSuperHeroes;

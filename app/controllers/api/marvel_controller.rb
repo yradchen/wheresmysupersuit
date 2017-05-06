@@ -23,6 +23,10 @@ class Api::MarvelController < ApplicationController
     render json: top_fifteen_heroes
   end
 
+  def update
+    debugger
+  end
+
   private
 
   AREAS = {

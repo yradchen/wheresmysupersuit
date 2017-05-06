@@ -8,11 +8,14 @@ class Autocomplete extends React.Component {
     this.state = { distance: "", address: "" };
     this.handleAddress = this.handleAddress.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.onChange = (address) => this.setState({ address });
+    this.onChange = this.onChange.bind(this);
   }
 
   handleFormSubmit(event) {
-    event.preventDefault();
+    // needed for the way autocomplete handles onEnterKeyDown.
+    if (typeof event === "object") {
+      event.preventDefault();
+    }
     geocodeByAddress(this.state.address, this.handleAddress);
   }
 
@@ -27,6 +30,10 @@ class Autocomplete extends React.Component {
       this.setState({[field]: e.currentTarget.value});
   }
 
+  onChange(address) {
+    this.setState({ address });
+  }
+
   render() {
     const inputProps = {
       value: this.state.address,
@@ -37,13 +44,14 @@ class Autocomplete extends React.Component {
       <section className="autocomplete absolute">
         <form onSubmit={this.handleFormSubmit}>
           <PlacesAutocomplete inputProps={inputProps}
+            onEnterKeyDown={this.handleFormSubmit}
           />
           <input type="text"
                   value={this.state.distance}
                   onChange={this.update("distance")}
                   placeholder={"Distance in miles"}
                   />
-          <input className="hidden" type="submit" value="search"/>
+          <input className="hidden" type="submit"/>
         </form>
       </section>
     );

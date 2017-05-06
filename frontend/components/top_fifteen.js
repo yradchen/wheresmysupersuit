@@ -19,7 +19,7 @@ const TopFifteen = (props) => {
 
       <div className="dropdown ">
         <button onClick={toggleDropDown}>Show Top Fifteen</button>
-        <div className={`drop-items ${props.dropdown}`}>
+        <div className={`drop-items bordered ${props.dropdown}`}>
           <ul>
             {superHeroes}
           </ul>
