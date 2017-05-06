@@ -10,21 +10,24 @@ class Api::MarvelController < ApplicationController
       distance = 125000
     end
 
-    redis = Redis.new
+    redis = create_redis_db
     heroes = redis.georadius("superheroes_location", lng, lat, distance, "mi", "ASC")
     render json: heroes
   end
 
   def index
-    redis = set_redis_db
-    get_and_set_heroes(redis)
-    top_fifteen_heroes = (redis.zrevrange("superheroes", 0, 14))
-    geoadd_data(redis, top_fifteen_heroes)
+    redis = create_redis_db
+    top_fifteen_heroes = find_top_fifteen(redis)
     render json: top_fifteen_heroes
   end
 
   def update
-    debugger
+    redis = create_redis_db
+    reset_redis_db(redis)
+    get_and_set_heroes(redis)
+    top_fifteen_heroes = find_top_fifteen(redis)
+    geoadd_data(redis, top_fifteen_heroes)
+    render json: top_fifteen_heroes
   end
 
   private
@@ -64,10 +67,18 @@ class Api::MarvelController < ApplicationController
     end
   end
 
-  def set_redis_db
+  def create_redis_db
     redis = Redis.new
+    redis
+  end
+
+  def reset_redis_db(redis)
     redis.flushall
     redis
+  end
+
+  def find_top_fifteen(redis)
+    redis.zrevrange("superheroes", 0, 14)
   end
 
   def set_heroes(response, redis)

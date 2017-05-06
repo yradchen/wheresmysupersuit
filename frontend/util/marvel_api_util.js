@@ -12,3 +12,11 @@ export const fetchSuperHero = (location) => {
     data: { location }
   });
 };
+
+export const setupSuperHeroes = () => {
+  debugger
+  return $.ajax({
+    method: 'PATCH',
+    url: `api/marvel/hero`,
+  });
+};

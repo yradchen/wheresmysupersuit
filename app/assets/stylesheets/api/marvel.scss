@@ -10,8 +10,17 @@ body, main, p, input, button, ul, li {
 li {
   list-style: none;
 }
+
+button {
+  cursor: pointer;
+}
+
 input {
   padding: 10px;
+}
+
+.hidden {
+  display: none;
 }
 
 .bordered {
@@ -21,15 +30,25 @@ input {
   background: white;
 }
 
-#map {
-  height: 100vh;
-  width: 100vw;
+.blue-button {
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #4285f4;
+  border: 1px solid #a4bde6;
+  border-radius: 4px;
+  color: white;
 }
 
 .absolute {
   position: absolute;
   z-index: 1;
 }
+
+#map {
+  height: 100vh;
+  width: 100vw;
+}
+
 
 .superhero {
   left: 80%;
@@ -43,17 +62,36 @@ input {
 .autocomplete {
   top: 10%;
   left: 5%;
-  width: 30%;
+  width: 40%;
+}
+
+.setup-redis {
+  left: 54.5%;
+  top: 5%;
 }
 
 .autocomplete > form {
   text-align: center;
+  display: flex;
+  align-items: center;
 }
 
-.autocomplete > form > input {
-  margin-top: 2px;
+.material-icons {
+  padding: 5.5px;
 }
 
+// .autocomplete > form > div {
+//   width: 70%;
+// }
+.autocomplete > form > div:first-child {
+  width: 70%;
+}
+.autocomplete > form > input:nth-child(2) {
+  width: 20%;
+}
+.autocomplete > form > i {
+  width: 10%;
+}
 
 .all-heroes {
   top: 10%;
@@ -61,9 +99,11 @@ input {
   display: flex;
 }
 
-.all-heroes > button, .all-heroes > div {
-  margin: 5px;
+
+.all-heroes button {
+  margin-right: 5px;
 }
+
 
 // drop-down
 
@@ -72,16 +112,9 @@ input {
 }
 
 .drop-items {
-  // border-color: grey;
   border: 1px solid lightgray;
   border-radius: 4px;
   padding: 5px;
   position: absolute;
   white-space: nowrap;
 }
-
-.hidden {
-  display: none;
-}
-
-// target input field of autocomplete

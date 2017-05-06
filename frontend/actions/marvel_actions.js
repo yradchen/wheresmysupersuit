@@ -12,6 +12,12 @@ const receiveSuperHeroes = (superHeroes) => ({
   superHeroes
 });
 
+export const setupSuperHeroes = () => dispatch => (
+  MarvelAPIUtil.setupSuperHeroes().then(
+    superHeroes => dispatch(receiveSuperHeroes(superHeroes))
+  )
+);
+
 export const fetchSuperHeroes = () => (dispatch) => ( MarvelAPIUtil.fetchSuperHeroes().then(
     superHeroes => dispatch(receiveSuperHeroes(superHeroes))
   )

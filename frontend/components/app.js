@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchSuperHeroes, fetchSuperHero } from '../actions/marvel_actions';
+import { fetchSuperHeroes, fetchSuperHero, setupSuperHeroes } from '../actions/marvel_actions';
 import { setGeolocation } from '../actions/geolocation_actions';
 import { setDropdownState } from '../actions/visibility_actions';
 
@@ -8,6 +8,8 @@ import GoogleMaps from './maps';
 import Autocomplete from './autocomplete';
 import ClosestSuperHeroes from './closest_superheroes';
 import TopFifteen from './top_fifteen';
+import SetupRedis from './setup_redis';
+
 const mapStateToProps = (state) => {
   return {
     geolocation: state.geolocation,
@@ -22,7 +24,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchSuperHeroes: () => dispatch(fetchSuperHeroes()),
     fetchSuperHero: (location) => dispatch(fetchSuperHero(location)),
     setGeolocation: (geolocation) => dispatch(setGeolocation(geolocation)),
-    setDropdownState: (hiddenOrNone) => dispatch(setDropdownState(hiddenOrNone))
+    setDropdownState: (hiddenOrNone) => dispatch(setDropdownState(hiddenOrNone)),
+    setupSuperHeroes: () => dispatch(setupSuperHeroes())
   };
 };
 
@@ -45,6 +48,7 @@ class Homepage extends React.Component {
     return (
       <main id="main" onClick={this.removeDropDown}>
         <div id="body">
+          <SetupRedis setupSuperHeroes={this.props.setupSuperHeroes}/>
           <ClosestSuperHeroes closestSuperheroes={this.props.closestSuperheroes}/>
           <Autocomplete setGeolocation={this.props.setGeolocation} fetchSuperHero={this.props.fetchSuperHero}/>
           <GoogleMaps geolocation={this.props.geolocation} />

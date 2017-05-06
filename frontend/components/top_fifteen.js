@@ -15,10 +15,10 @@ const TopFifteen = (props) => {
 
   return (
     <div className="absolute all-heroes">
-      <button onClick={props.fetchSuperHeroes}>Get Top 15 Marvel Superheroes!</button>
+      <button className="blue-button" onClick={props.fetchSuperHeroes}>Fetch Top 15 Heroes</button>
 
       <div className="dropdown ">
-        <button onClick={toggleDropDown}>Show Top Fifteen</button>
+        <button className="blue-button" onClick={toggleDropDown}>Show Top Fifteen Heroes</button>
         <div className={`drop-items bordered ${props.dropdown}`}>
           <ul>
             {superHeroes}

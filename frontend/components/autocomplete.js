@@ -40,19 +40,29 @@ class Autocomplete extends React.Component {
       onChange: this.onChange,
       placeholder: "Search Places and Nearby Marvel Heroes"
     };
+
+    const cssClasses = {
+      root: 'form-group',
+      input: 'form-control',
+      autocompleteContainer: 'my-autocomplete-container'
+    };
+
     return (
       <section className="autocomplete absolute">
         <form onSubmit={this.handleFormSubmit}>
           <PlacesAutocomplete inputProps={inputProps}
             onEnterKeyDown={this.handleFormSubmit}
           />
+
           <input type="text"
                   value={this.state.distance}
                   onChange={this.update("distance")}
                   placeholder={"Distance in miles"}
                   />
-          <input className="hidden" type="submit"/>
+          <input type="submit" className="hidden"/>
+          <i className="material-icons blue-button">search</i>
         </form>
+
       </section>
     );
   }
