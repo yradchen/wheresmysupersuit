@@ -52,7 +52,7 @@ class Api::MarvelController < ApplicationController
 
   def get_and_set_heroes(redis)
     base_address = "https://gateway.marvel.com:443/v1/public/characters"
-    1.times do |number|
+    15.times do |number|
       ts = Time.now.to_i
       hash = Digest::MD5.hexdigest("#{ts}#{ENV["MARVEL"]}#{ENV["MARVEL_PUBLIC"]}")
       params = {

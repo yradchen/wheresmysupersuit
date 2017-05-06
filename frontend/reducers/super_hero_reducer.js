@@ -1,7 +1,7 @@
 import { RECEIVE_SUPERHEROES, RECEIVE_SUPERHERO } from  '../actions/marvel_actions';
 
 const _state = {
-  topFifteen: ["Database loading"],
+  topFifteen: ["Please Setup Database"],
   closest: []
 };
 
