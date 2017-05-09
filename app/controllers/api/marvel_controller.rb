@@ -11,7 +11,7 @@ class Api::MarvelController < ApplicationController
     end
 
     redis = create_redis_db
-    heroes = redis.georadius("superheroes_location", lng, lat, distance, "mi", "ASC")
+    heroes = redis.georadius("superheroes_location", lng, lat, distance, "mi", "ASC", "withdist")
     render json: heroes
   end
 

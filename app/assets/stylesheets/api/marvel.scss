@@ -19,6 +19,10 @@ input {
   padding: 10px;
 }
 
+i {
+  cursor: pointer;
+}
+
 .hidden {
   display: none;
 }
@@ -66,8 +70,8 @@ input {
 }
 
 .setup-redis {
-  left: 5%;
-  top: 5%;
+  left: 42%;
+  // top: 5%;
 }
 
 .autocomplete > form {

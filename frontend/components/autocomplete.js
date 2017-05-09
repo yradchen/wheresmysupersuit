@@ -60,7 +60,8 @@ class Autocomplete extends React.Component {
                   placeholder={"Distance in miles"}
                   />
           <input type="submit" className="hidden"/>
-          <i className="material-icons blue-button">search</i>
+          <i className="material-icons blue-button"
+            onClick={this.handleFormSubmit}>search</i>
         </form>
 
       </section>
